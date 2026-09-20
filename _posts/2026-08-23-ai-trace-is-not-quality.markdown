@@ -8,8 +8,6 @@ tags: [AI, AI-Native, 协作, 质量工程, 工作流]
 permalink: /ai/collaboration/2026/08/23/ai-trace-is-not-quality.html
 visual_theme: ai-native
 reading_meta: 约 5200 字 · 13 分钟阅读
-featured: true
-featured_rank: 2
 ---
 
 <section class="ai-native-context" aria-label="背景摘要">
