@@ -4,6 +4,8 @@ title: 向内求索：Be water, my friend.
 date: 2026-07-19 20:30:00 +0800
 excerpt: 从抖音刷到周星驰的一段采访，又追到李小龙关于水的比喻。恰逢最近工作有些不顺，借这句话记下几句：该吐槽就吐槽，该调整就调整，路还要继续走。
 categories: 生活随笔
+featured: true
+featured_rank: 1
 permalink: /life/2026/07/19/inward-search.html
 image: /images/26071901-cat-angel-share.jpg
 image_type: image/jpeg
