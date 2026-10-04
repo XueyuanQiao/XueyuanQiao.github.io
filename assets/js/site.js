@@ -1007,7 +1007,11 @@
       if (status) status.textContent = (query ? visible.length + ' 条匹配结果' : '最近更新的 ' + visible.length + ' 篇文章');
     }
 
-    function setActive(next) {
+    // ensureVisible 默认开启：键盘上下翻选时把选中项滚入视野。
+    // 指针悬停必须传 false —— 否则鼠标停在首篇/末篇文章上滚动列表时，
+    // scrollIntoView 会把刚滚动出去的项又拉回视野，和用户的滚动互相拉扯，
+    // 于是列表在原地来回抖动、滚不动。
+    function setActive(next, ensureVisible) {
       if (!visible.length) return;
       active = (next + visible.length) % visible.length;
       var options = results.querySelectorAll('.search-result');
@@ -1015,7 +1019,7 @@
         var selected = index === active;
         option.classList.toggle('is-active', selected);
         option.setAttribute('aria-selected', selected ? 'true' : 'false');
-        if (selected) option.scrollIntoView({ block: 'nearest' });
+        if (selected && ensureVisible !== false) option.scrollIntoView({ block: 'nearest' });
       });
       input.setAttribute('aria-activedescendant', 'search-result-' + active);
     }
@@ -1027,7 +1031,9 @@
       var option = event.target.closest && event.target.closest('.search-result');
       if (!option) return;
       var index = parseInt(option.id.replace('search-result-', ''), 10);
-      if (!isNaN(index)) setActive(index);
+      // 同一项内部移动（标题→摘要→标签）不必重复高亮，避免多余的样式与滚动计算
+      if (isNaN(index) || index === active) return;
+      setActive(index, false);
     });
     dialog.addEventListener('click', function (event) {
       if (event.target === dialog) closeSearch();
